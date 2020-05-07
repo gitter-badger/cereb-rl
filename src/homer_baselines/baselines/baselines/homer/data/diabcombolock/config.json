@@ -1,0 +1,8 @@
+{
+"num_actions": 10,
+"actions": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+"horizon": 20, 
+"obs_dim": -1,
+"feature_type": "feature",
+"gamma": 1.0
+}

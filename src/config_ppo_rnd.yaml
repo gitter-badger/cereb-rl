@@ -1,0 +1,45 @@
+description: Diabolical Combolock Baselines
+
+target:
+  vc: msrlabs
+  cluster: gcr
+
+environment:
+  image: microsoft_pytorch:v1.2.0_gpu_cuda9.0_py36_release_gpuenv_hvd0.16.2
+  registry: phillyregistry.azurecr.io
+
+code:
+  local_dir: $CONFIG_DIR
+
+
+search:
+  job_template:
+    name: search_{experiment_name:s}_{lr:.5f}
+    sku: G1
+    command:
+    - cd environments/
+    - python -m pip install -e . --user
+    - cd ../homer_baselines/DeepRL/
+    - source setup.sh
+    - python run.py -alg {alg} -lr {lr} -env diabcombolock -horizon {horizon} -system philly -rnd_bonus {rnd_bonus} -normalize_bonus_rewards {normalize_bonus_rewards} -seed {seed}
+  type: grid
+  max_trials: 1000
+  params:
+    - name: seed
+      spec: discrete
+      values: [1, 2, 3, 4, 5]  
+    - name: horizon
+      spec: discrete
+      values: [3, 6]
+    - name: lr
+      spec: discrete
+      values: [0.01, 0.001, 0.0001]
+    - name: rnd_bonus
+      spec: discrete
+      values: [1, 10, 100, 1000]
+    - name: alg
+      spec: discrete
+      values: [ppo-rnd]
+    - name: normalize_bonus_rewards
+      spec: discrete
+      values: [0, 1]
