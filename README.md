@@ -1,5 +1,7 @@
 # Homer Algorithm 
 
+[![Join the chat at https://gitter.im/cereb-rl/core-library](https://badges.gitter.im/cereb-rl/core-library.svg)](https://gitter.im/cereb-rl/core-library?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Code for Homer Algorithm developed at Microsoft Research, New York.
 
 Please don't share it outside Microsoft.
